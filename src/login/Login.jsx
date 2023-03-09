@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import {
 } from 'react-router-dom';
 
+import { backend } from "../env.js"
+import "./Login.css"
+
 // Define Login component
 export function Login(props) {
   // Declare state variables
@@ -14,35 +17,41 @@ export function Login(props) {
     event.preventDefault();
 
     // Make API call to authenticate user
-    const response = await fetch('/api/login', {
+    const response = await fetch(`${backend}/op/login`, {
       method: 'POST',
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ studentId, password }),
       headers: {
         'Content-Type': 'application/json'
       }
-    });
+    })
 
     if (response.ok) {
       // Redirect to dashboard page
-      history.push('/dashboard');
+      alert("Logged in");
     } else {
       // Display error message
-      alert('Invalid email or password');
+      alert('Invalid student ID or password');
     }
   };
 
   return (
-    <div>
+    <div className="login-dialog">
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          Student ID
+          <input
+            type="text" required
+            value={studentId}
+            onChange={(e) => setStudentId(e.target.value)}
+          />
         </label>
         <br />
         <label>
-          Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          Password
+          <input type="password" required
+            value={password}
+            onChange={(e) => setPassword(e.target.value)} />
         </label>
         <br />
         <button type="submit">Login</button>

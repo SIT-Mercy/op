@@ -25,8 +25,10 @@ body {
   height: 100%;
   margin: 0;
   line-height: 1.5;
-  color: #121212;
+  color: #AFAFAF;
+  background-color: #212121;
 }
+
 textarea,
 input,
 button {
@@ -35,11 +37,11 @@ button {
   border: none;
   border-radius: 8px;
   padding: 0.5rem 0.75rem;
-  box-shadow: 0 0px 1px hsla(0, 0%, 0%, 0.2), 0 1px 2px hsla(0, 0%, 0%, 0.2);
-  background-color: white;
   line-height: 1.5;
   margin: 0;
+  background-color: #3A3A3A;
 }
+
 button {
   color: #3992ff;
   font-weight: 500;
