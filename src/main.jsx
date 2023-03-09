@@ -8,21 +8,28 @@ import {
   Routes,
 } from "react-router-dom";
 import './index.css'
-import { Login } from './login/login';
+import { Login, action as loginAction } from './login/login';
+import { DashBoard } from './main/dashboard';
+import { ItemList, loader as itemListLoader } from './main/itemList';
 
-const router = createBrowserRouter(createRoutesFromElements(
-  <Routes>
-    <Route
-      path="/"
-      element={<Login />}
-    >
-    </Route>
-    <Route
-      path="/"
-    >
-    </Route>
-  </Routes>)
-);
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Login />,
+    action: loginAction,
+  },
+  {
+    path: "dashboard",
+    element: <DashBoard />,
+    children: [
+      {
+        path: "itemList",
+        loader: itemListLoader,
+        element: <ItemList />
+      }
+    ]
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
