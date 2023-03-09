@@ -1,3 +1,4 @@
 export const backend = {
-  root: import.meta.env.REACT_APP_BACKEND_URL,
+  root: import.meta.env.VITE_BACKEND_URL,
+  login: `${this.root}/op/login`,
 }

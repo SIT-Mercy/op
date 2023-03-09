@@ -5,16 +5,23 @@ import {
   Route,
   createRoutesFromElements,
   RouterProvider,
+  Routes,
 } from "react-router-dom";
 import './index.css'
-import { Login } from './login/Login';
+import { Login } from './login/login';
 
 const router = createBrowserRouter(createRoutesFromElements(
-  <Route
-    path="/"
-    element={<Login />}
-  >
-  </Route>)
+  <Routes>
+    <Route
+      path="/"
+      element={<Login />}
+    >
+    </Route>
+    <Route
+      path="/"
+    >
+    </Route>
+  </Routes>)
 );
 
 ReactDOM.createRoot(document.getElementById('root')).render(
