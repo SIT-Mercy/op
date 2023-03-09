@@ -10,7 +10,12 @@ import {
 import './index.css'
 import { Login, action as loginAction } from './login/login';
 import { DashBoard } from './main/dashboard';
-import { ItemList, loader as itemListLoader } from './main/itemList';
+import {
+  ItemList,
+  loader as itemListLoader,
+  newItemAction
+} from './main/item';
+import NewItem from './main/item/new';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +30,14 @@ const router = createBrowserRouter([
       {
         path: "itemList",
         loader: itemListLoader,
-        element: <ItemList />
+        action: newItemAction,
+        element: <ItemList />,
+        children: [
+          {
+            path: "new",
+            element: <NewItem />
+          }
+        ]
       }
     ]
   },

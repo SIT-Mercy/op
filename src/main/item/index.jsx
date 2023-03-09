@@ -1,7 +1,14 @@
 import {
+  Form,
+  redirect,
   useLoaderData,
 } from "react-router-dom";
-import { backend } from "../env"
+import { backend } from "../../env"
+
+export function newItemAction({ request }) {
+  console.log(request)
+  return redirect("new")
+}
 
 export async function loader({ request, params }) {
   const jwt = localStorage.getItem('jwt');
@@ -19,5 +26,15 @@ export async function loader({ request, params }) {
 export function ItemList(props) {
   const { items } = useLoaderData();
   console.log(items)
-  return "AAA"
+  return (<div>
+    <Header></Header>
+  </div>)
+}
+
+function Header(props) {
+  return (<div>
+    <Form method="post">
+      <button type="submit">New</button>
+    </Form>
+  </div>)
 }
