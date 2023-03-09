@@ -10,14 +10,13 @@ import {
   useSubmit,
 } from "react-router-dom";
 import "./dashboard.css"
-
+import { i18n } from "../env"
 export function DashBoard() {
   const navigation = useNavigation();
-
   return (
     <>
       <div id="sidebar">
-        <h1>Mercy</h1>
+        <h1>{i18n.get("appName")}</h1>
         <nav>
           <ul>
             <li key="item-list">
