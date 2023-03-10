@@ -52,7 +52,7 @@ function ItemCard(props) {
   const { item } = props
   // placeholder images.
   return (
-    <div className="card">
+    <div className="card item-card">
       <img src="https://picsum.photos/200" />
       <h3>{item.name}</h3>
       <br />
