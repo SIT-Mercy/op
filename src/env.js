@@ -15,3 +15,4 @@ export const { i18n, i18nProxy } = createI18n({
   defaultL10n: l10nEn,
 })
 i18n.add("zh-CN", l10nZh)
+i18n.currentLocale = navigator.language

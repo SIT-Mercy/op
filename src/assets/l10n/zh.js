@@ -6,6 +6,9 @@ const l10n = {
   students:{
     title: "学生",
   },
+  password: "密码",
+  studentId: "学号",
+  login: "登录",
 }
 
 export default l10n

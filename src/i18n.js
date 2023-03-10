@@ -12,7 +12,7 @@ export class I18n {
   }
 
   set currentLocale(locale) {
-    this._currentLocale = locale
+    this._currentLocale = locale.toLowerCase()
   }
 
   get currentL10n() {

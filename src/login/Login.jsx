@@ -5,9 +5,12 @@ import {
   Form,
 } from 'react-router-dom';
 
-import { backend } from "../env.js"
+import {
+  backend,
+  i18n
+} from "../env.js"
 import { composeAuthHeader } from '../request.js';
-import "./Login.css"
+import "./login.css"
 
 export async function loader({ request }) {
   const jwt = localStorage.getItem("jwt")
@@ -51,21 +54,21 @@ export async function action({ request }) {
 // Define Login component
 export function Login(props) {
   return (
-    <div className="login-dialog">
-      <h1>Login</h1>
+    <div id="login-dialog">
+      <h1>{i18n.get("appName")}</h1>
       <Form method="post" id="login-form">
-        <span>Student ID</span>
+        <span>{i18n.get("studentId")}</span>
         <input
           type="text" required
           name="studentId"
         />
         <br />
-        <span>Password</span>
+        <span>{i18n.get("password")}</span>
         <input type="password" required
           name="password"
         />
         <br />
-        <button type="submit">Login</button>
+        <button type="submit">{i18n.get("login")}</button>
       </Form>
     </div>
   );
