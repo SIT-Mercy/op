@@ -5,7 +5,11 @@ import {
   RouterProvider,
 } from "react-router-dom"
 import './index.css'
-import { Login, action as loginAction } from './login/login'
+import {
+  Login,
+  loader as loginLoader,
+  action as loginAction
+} from './login/login'
 import { DashBoard } from './main/dashboard'
 import {
   ItemList,
@@ -26,6 +30,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Login />,
     action: loginAction,
+    loader: loginLoader,
   },
   {
     path: "dashboard",

@@ -2,6 +2,7 @@ import { createI18n } from "./i18n"
 const root = import.meta.env.VITE_BACKEND_URL
 export const backend = {
   root,
+  validate: `${root}/op/validate`,
   login: `${root}/op/login`,
   items: `${root}/op/items`,
   addItem: `${root}/op/item/add`,

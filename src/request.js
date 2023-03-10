@@ -2,8 +2,8 @@ import {
   redirect
 } from "react-router-dom";
 
-function composeAuthHeader() {
-  const jwt = localStorage.getItem('jwt');
+export function composeAuthHeader(jwt) {
+  jwt = jwt || localStorage.getItem('jwt');
   return `Bearer ${jwt}`
 }
 

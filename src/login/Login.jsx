@@ -6,8 +6,29 @@ import {
 } from 'react-router-dom';
 
 import { backend } from "../env.js"
+import { composeAuthHeader } from '../request.js';
 import "./Login.css"
 
+export async function loader({ request }) {
+  const jwt = localStorage.getItem("jwt")
+  if (jwt === null) return null
+  const response = await fetch(backend.validate, {
+    method: 'POST',
+    headers: {
+      Authorization: composeAuthHeader(jwt),
+      'Content-Type': 'application/json',
+    }
+  })
+  if (response.ok) {
+    return redirect("/dashboard")
+  } else {
+    return null
+  }
+}
+
+/**
+ * Handle log in
+ */
 export async function action({ request }) {
   const formData = await request.formData()
   const credentials = Object.fromEntries(formData)
