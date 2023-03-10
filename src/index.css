@@ -190,7 +190,7 @@ form[action$="destroy"] button {
 .card {
   display: block;
   border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px #000000AA;
   background-color: #252525;
   padding: 10px;
   margin: 5px;

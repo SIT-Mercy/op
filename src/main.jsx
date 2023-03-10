@@ -2,10 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
-  Route,
-  createRoutesFromElements,
   RouterProvider,
-  Routes,
 } from "react-router-dom";
 import './index.css'
 import { Login, action as loginAction } from './login/login';
