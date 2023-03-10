@@ -3,15 +3,19 @@ import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
   RouterProvider,
-} from "react-router-dom";
+} from "react-router-dom"
 import './index.css'
-import { Login, action as loginAction } from './login/login';
-import { DashBoard } from './main/dashboard';
+import { Login, action as loginAction } from './login/login'
+import { DashBoard } from './main/dashboard'
 import {
   ItemList,
   loader as itemListLoader,
   action as itemListAction,
-} from './main/item';
+} from './main/item'
+import {
+  StudentList,
+  loader as studentListLoader,
+} from "./main/student/index"
 import {
   NewItem,
   action as newItemAction
@@ -37,7 +41,12 @@ const router = createBrowserRouter([
         path: "items/new",
         action: newItemAction,
         element: <NewItem />
-      }
+      },
+      {
+        path: "students",
+        loader: studentListLoader,
+        element: <StudentList />,
+      },
     ]
   },
 ]);

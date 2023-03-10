@@ -63,10 +63,10 @@ function ItemCard(props) {
 
 function Header(props) {
   return (
-    <div>
+    <>
       <Form method="post">
         <button type="submit">New</button>
       </Form>
-    </div>
+    </>
   )
 }

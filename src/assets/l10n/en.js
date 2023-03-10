@@ -3,6 +3,9 @@ const l10n = {
   items: {
     title: "Items",
   },
+  students:{
+    title: "Students",
+  },
 }
 
 export default l10n
