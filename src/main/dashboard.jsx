@@ -13,11 +13,9 @@ import "./dashboard.css"
 import { i18n } from "../env"
 export function DashBoard() {
   const navigation = useNavigation();
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   return (
     <>
-      <div id="sidebar"
-        className={isSidebarOpen ? "show" : ""}>
+      <div id="sidebar">
         <h1>{i18n.get("appName")}</h1>
         <nav>
           <ul>
