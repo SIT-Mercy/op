@@ -51,6 +51,7 @@ function ItemCard(props) {
   const { item } = props
   return (
     <div className="card">
+      <img src={item.imgUrl}/>
       <h3>{item.name}</h3>
       <br />
       <a>{item.description}</a>
