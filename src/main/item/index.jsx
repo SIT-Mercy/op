@@ -5,26 +5,27 @@ import {
 } from "react-router-dom";
 import {
   backend,
-  addAuth
 } from "../../env"
+import {
+  authFetch,
+  withAuth,
+} from "../../request"
 import "./index.css"
 
 export function action({ request }) {
-  console.log(request)
   return redirect("./new")
 }
 
-export async function loader({ request, params }) {
-  const response = await fetch(backend.items, {
+export const loader = withAuth(async ({ request, params }) => {
+  const response = await authFetch(backend.items, {
     method: "GET",
     headers: {
-      ...addAuth(),
       'Content-Type': 'application/json'
     }
   })
   const items = await response.json()
   return { items: Array.from(items) }
-}
+})
 
 export function ItemList(props) {
   const { items } = useLoaderData();
@@ -49,9 +50,10 @@ export function ItemList(props) {
 
 function ItemCard(props) {
   const { item } = props
+  // placeholder images.
   return (
     <div className="card">
-      <img src={item.imgUrl}/>
+      <img src="https://picsum.photos/200" />
       <h3>{item.name}</h3>
       <br />
       <a>{item.description}</a>

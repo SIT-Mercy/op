@@ -7,27 +7,26 @@ import {
 
 import {
   backend,
-  addAuth
 } from "../../env"
+import {
+  authFetch, withAuth
+} from "../../request"
 
-export async function action({ request }) {
+export const action = withAuth(async ({ request }) => {
   const data = Object.fromEntries(await request.formData());
-  console.log(data)
-  const response = await fetch(backend.addItem, {
+  const response = await authFetch(backend.addItem, {
     method: "POST",
     body: JSON.stringify({
       name: data.name,
       description: data.description,
     }),
     headers: {
-      ...addAuth(),
       'Content-Type': 'application/json'
     }
   })
   const res = await response.json()
-  console.log(res)
   return redirect("../items")
-}
+})
 
 export function NewItem() {
   const navigate = useNavigate();
