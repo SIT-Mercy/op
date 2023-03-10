@@ -12,12 +12,12 @@ import {
 } from './login/login'
 import { DashBoard } from './main/dashboard'
 import {
-  ItemList,
+  ItemPanel,
   loader as itemListLoader,
   action as itemListAction,
 } from './main/item'
 import {
-  StudentList,
+  StudentPanel,
   loader as studentListLoader,
 } from "./main/student/index"
 import {
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         path: "items",
         loader: itemListLoader,
         action: itemListAction,
-        element: <ItemList />,
+        element: <ItemPanel />,
       },
       {
         path: "items/new",
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
       {
         path: "students",
         loader: studentListLoader,
-        element: <StudentList />,
+        element: <StudentPanel />,
       },
     ]
   },

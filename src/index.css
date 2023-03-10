@@ -65,13 +65,11 @@ form[action$="destroy"] button {
   width: 100%;
 }
 
-#detail {
+#panel {
   flex: 1;
-  padding: 1rem 1rem;
-  width: 100%;
 }
 
-#detail.loading {
+#panel.loading {
   opacity: 0.25;
   transition: opacity 200ms;
   transition-delay: 200ms;
@@ -115,4 +113,9 @@ label {
   margin: 0;
   font-size: 14px;
   line-height: 1.2;
+}
+
+.app-bar {
+  height: 3rem;
+  background-color: #3A3A3A;
 }

@@ -27,7 +27,7 @@ export const loader = withAuth(async ({ request, params }) => {
   return { items: Array.from(items) }
 })
 
-export function ItemList(props) {
+export function ItemPanel(props) {
   const { items } = useLoaderData();
   let itemArea
   if (items.length === 0) {
@@ -63,10 +63,10 @@ function ItemCard(props) {
 
 function Header(props) {
   return (
-    <>
+    <div className="app-bar">
       <Form method="post">
         <button type="submit">New</button>
       </Form>
-    </>
+    </div>
   )
 }

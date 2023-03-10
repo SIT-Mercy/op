@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Outlet,
   Link,
@@ -13,9 +13,11 @@ import "./dashboard.css"
 import { i18n } from "../env"
 export function DashBoard() {
   const navigation = useNavigation();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   return (
     <>
-      <div id="sidebar">
+      <div id="sidebar"
+        className={isSidebarOpen ? "show" : ""}>
         <h1>{i18n.get("appName")}</h1>
         <nav>
           <ul>
@@ -32,7 +34,7 @@ export function DashBoard() {
           </ul>
         </nav>
       </div>
-      <div id="detail"
+      <div id="panel"
         className={
           navigation.state === "loading" ? "loading" : ""
         }

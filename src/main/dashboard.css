@@ -4,6 +4,21 @@
   background-color: #2A2A2A;
   display: flex;
   flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+}
+
+#sidebar.show {
+  transform: translateX(0%);
+}
+
+/* Media query for small screens */
+@media only screen and (max-width: 512px) {
+
+  /* Hide the sidebar */
+  #sidebar {
+    display: none;
+  }
 }
 
 #sidebar>* {
