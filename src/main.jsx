@@ -13,9 +13,12 @@ import { DashBoard } from './main/dashboard';
 import {
   ItemList,
   loader as itemListLoader,
-  newItemAction
+  action as itemListAction,
 } from './main/item';
-import NewItem from './main/item/new';
+import {
+  NewItem,
+  action as newItemAction
+} from './main/item/new';
 
 const router = createBrowserRouter([
   {
@@ -28,16 +31,15 @@ const router = createBrowserRouter([
     element: <DashBoard />,
     children: [
       {
-        path: "itemList",
+        path: "items",
         loader: itemListLoader,
-        action: newItemAction,
+        action: itemListAction,
         element: <ItemList />,
-        children: [
-          {
-            path: "new",
-            element: <NewItem />
-          }
-        ]
+      },
+      {
+        path: "items/new",
+        action: newItemAction,
+        element: <NewItem />
       }
     ]
   },

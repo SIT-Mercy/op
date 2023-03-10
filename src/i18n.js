@@ -24,16 +24,25 @@ export class I18n {
   }
 
   get(key) {
-    let localized
-    if (this.currentL10n instanceof Map) {
-      localized = this.currentL10n.get(key)
-    } else {
-      localized = this.currentL10n[key]
+    const parts = key.split(".")
+    let localized = this.currentL10n
+    for (let part of parts) {
+      if (typeof localized === "string" || localized === undefined) {
+        break
+      }
+      localized = this.getFrom(localized, part)
     }
     if (localized) {
       return localized
     } else {
-      return `?${key}"?`
+      return `?${key}?`
+    }
+  }
+  getFrom(container, key) {
+    if (container instanceof Map) {
+      return container.get(key)
+    } else {
+      return container[key]
     }
   }
 }

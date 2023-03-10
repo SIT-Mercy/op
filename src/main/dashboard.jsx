@@ -21,7 +21,7 @@ export function DashBoard() {
           <ul>
             <li key="item-list">
               <NavLink
-                to={`itemList`}
+                to={`items`}
                 className={({ isActive, isPending }) =>
                   isActive
                     ? "active"
@@ -29,7 +29,7 @@ export function DashBoard() {
                       ? "pending"
                       : ""
                 }>
-                Item List
+                {i18n.get("items.title")}
               </NavLink>
             </li>
           </ul>

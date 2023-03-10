@@ -5,15 +5,31 @@ import {
   useNavigate,
 } from "react-router-dom";
 
-export async function action({ request, params }) {
-  const formData = await request.formData();
-  const updates = Object.fromEntries(formData);
-  console.log(updates)
-  await updateContact(params.contactId, updates);
-  return redirect(`/contacts/${params.contactId}`);
+import {
+  backend,
+  addAuth
+} from "../../env"
+
+export async function action({ request }) {
+  const data = Object.fromEntries(await request.formData());
+  console.log(data)
+  const response = await fetch(backend.addItem, {
+    method: "POST",
+    body: JSON.stringify({
+      name: data.name,
+      description: data.description,
+    }),
+    headers: {
+      ...addAuth(),
+      'Content-Type': 'application/json'
+    }
+  })
+  const res = await response.json()
+  console.log(res)
+  return redirect("../items")
 }
 
-export default function NewItem() {
+export function NewItem() {
   const navigate = useNavigate();
 
   return (
@@ -21,27 +37,31 @@ export default function NewItem() {
       <p>
         <span>Name</span>
         <input
+          required
           placeholder="Item"
           aria-label="Item name"
           type="text"
           name="name"
         />
+        <br />
         <span>Description</span>
-        <input
+        <textarea
           placeholder="Description"
           aria-label="Item description"
           type="text"
           name="description"
+          rows={6}
         />
       </p>
+      <br />
       <p>
-        <button type="submit">Save</button>
+        <button type="submit">Add</button>
         <button type="button"
           onClick={() => {
             navigate(-1);
           }}>
           Cancel
-          </button>
+        </button>
       </p>
     </Form>
   );
