@@ -45,7 +45,7 @@ export function DashBoard() {
   const drawer = (
     <div id="sidebar">
       <Toolbar>
-        <a>{loginInfo?.name}</a>
+        <a>{loginInfo.name}</a>
         <Button onClick={() => {
           env.loginInfo = null
           navigate("/")

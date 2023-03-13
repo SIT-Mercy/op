@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import {
   Form,
   redirect,
@@ -64,7 +65,7 @@ function Header(props) {
   return (
     <div className="app-bar">
       <Form method="post">
-        <button type="submit">New</button>
+        <Button type="submit">New</Button>
       </Form>
     </div>
   )
