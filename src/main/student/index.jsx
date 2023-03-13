@@ -1,10 +1,11 @@
+import React from "react"
 import {
   Form,
   redirect,
   useLoaderData,
 } from "react-router-dom";
 import {
-  backend,
+  backend, i18n,
 } from "../../env"
 import {
   authFetch,
@@ -38,7 +39,7 @@ export function StudentPanel() {
     <div>
       <Header />
       <br />
-      {studentArea}
+      <StudentGrid data={students} />
     </div>
   )
 }
@@ -57,5 +58,74 @@ function Header(props) {
     <div className="app-bar">
       aaa
     </div>
+  )
+}
+
+import { useTable } from 'react-table'
+
+const studentGridColumn = [
+  {
+    Header: i18n.get("student.studentId"),
+    accessor: 'studentId'
+  },
+  {
+    Header: i18n.get("student.name"),
+    accessor: 'name'
+  },
+  {
+    Header: i18n.get("student.college"),
+    accessor: 'college'
+  },
+  {
+    Header: i18n.get("student.point"),
+    accessor: 'point'
+  },
+]
+
+function StudentGrid(props) {
+  const data = props.data
+  console.log(data);
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+  } = useTable({ columns: studentGridColumn, data })
+
+  return (
+    <table {...getTableProps()}>
+      <thead>
+        {headerGroups.map(headerGroup => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map(column => (
+              <th
+                {...column.getHeaderProps()}
+              >
+                {column.render('Header')}
+              </th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps()}>
+        {rows.map(row => {
+          prepareRow(row)
+          return (
+            <tr {...row.getRowProps()}>
+              {row.cells.map(cell => {
+                return (
+                  <td
+                    {...cell.getCellProps()}
+                  >
+                    {cell.render('Cell')}
+                  </td>
+                )
+              })}
+            </tr>
+          )
+        })}
+      </tbody>
+    </table>
   )
 }

@@ -57,7 +57,7 @@ export function Login(props) {
     <div id="login-dialog">
       <h1>{i18n.get("appName")}</h1>
       <Form method="post" id="login-form">
-        <span>{i18n.get("studentId")}</span>
+        <span>{i18n.get("student.studentId")}</span>
         <input
           type="text" required
           name="studentId"

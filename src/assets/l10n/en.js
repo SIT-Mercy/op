@@ -6,8 +6,13 @@ const l10n = {
   students: {
     title: "Students",
   },
+  student: {
+    studentId: "Student ID",
+    name: "Name",
+    college: "College",
+    point: "Point",
+  },
   password: "Password",
-  studentId: "Student ID",
   login: "Login",
 }
 

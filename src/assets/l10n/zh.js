@@ -7,7 +7,12 @@ const l10n = {
     title: "学生",
   },
   password: "密码",
-  studentId: "学号",
+  student: {
+    studentId: "学号",
+    name: "姓名",
+    college: "学院",
+    point: "爱心积分",
+  },
   login: "登录",
 }
 
