@@ -37,8 +37,6 @@ export function StudentPanel() {
   }
   return (
     <div>
-      <Header />
-      <br />
       <StudentGrid data={students} />
     </div>
   )
@@ -49,14 +47,6 @@ function Row(props) {
   return (
     <div>
       <a>{student.name}</a>
-    </div>
-  )
-}
-
-function Header(props) {
-  return (
-    <div className="app-bar">
-      aaa
     </div>
   )
 }

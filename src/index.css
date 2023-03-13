@@ -26,8 +26,6 @@ body {
   height: 100%;
   margin: 0;
   line-height: 1.5;
-  color: #AFAFAF;
-  background-color: #212121;
 }
 
 textarea,
@@ -40,7 +38,6 @@ button {
   padding: 0.5rem 0.75rem;
   line-height: 1.5;
   margin: 0;
-  color: #FAFAFA;
   box-shadow: 0 0 10px #000000AA;
   background-color: #3A3A3A;
 }

@@ -41,7 +41,6 @@ export function ItemPanel(props) {
   }
   return (
     <div>
-      <Header />
       <br />
       {itemArea}
     </div>
