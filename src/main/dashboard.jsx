@@ -129,50 +129,11 @@ export function DashBoard() {
       </Box>
     </Box>
   )
-  return (
-    <>
-      <div id="sidebar">
-        <h1>{i18n.get("appName")}</h1>
-        <nav>
-          <ul>
-            <NavItem
-              key="student-list"
-              to="students"
-              title={i18n.get("students.title")}
-            />
-            <NavItem
-              key="item-list"
-              to="items"
-              title={i18n.get("items.title")}
-            />
-          </ul>
-        </nav>
-      </div>
-      <div id="panel"
-        className={
-          navigation.state === "loading" ? "loading" : ""
-        }
-      >
-        <Outlet />
-      </div>
-    </>
-  );
 }
 
 function NavItem(props) {
-  return (
-    <li>
-      <NavLink
-        to={props.to}
-        className={({ isActive, isPending }) =>
-          isActive
-            ? "active"
-            : isPending
-              ? "pending"
-              : ""
-        }>
-        {props.title}
-      </NavLink>
-    </li>
-  )
+  return <ListItemButton
+    component={NavLink} to={props.to}>
+    {props.title}
+  </ListItemButton>
 }

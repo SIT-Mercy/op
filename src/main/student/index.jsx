@@ -19,6 +19,8 @@ export const loader = withAuth(async ({ request, params }) => {
       'Content-Type': 'application/json'
     }
   })
+  // TODO: Test visual effects
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   const students = await response.json()
   return { students: Array.from(students) }
 })
