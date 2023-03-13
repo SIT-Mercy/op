@@ -24,6 +24,7 @@ import {
   NewItem,
   action as newItemAction
 } from './main/item/new';
+import { i18n } from './env'
 
 const router = createBrowserRouter([
   {
@@ -61,3 +62,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <RouterProvider router={router} />
   </React.StrictMode>,
 )
+
+document.title = i18n.get("appName")
