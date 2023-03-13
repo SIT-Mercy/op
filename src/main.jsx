@@ -16,16 +16,11 @@ import {
 import {
   ItemPanel,
   loader as itemListLoader,
-  action as itemListAction,
 } from './main/item'
 import {
   StudentPanel,
   loader as studentListLoader,
 } from "./main/student/index"
-import {
-  NewItemPanel,
-  action as newItemAction
-} from './main/item/new';
 import { i18n } from './env'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -44,13 +39,7 @@ const router = createBrowserRouter([
       {
         path: "items",
         loader: itemListLoader,
-        action: itemListAction,
         element: <ItemPanel />,
-      },
-      {
-        path: "items/new",
-        action: newItemAction,
-        element: <NewItemPanel />
       },
       {
         path: "students",

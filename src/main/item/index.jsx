@@ -14,11 +14,8 @@ import {
 import { ResponsiveAppBar } from "../dashboard";
 import "./index.css"
 import Card from "@mui/material/Card"
-
-export function action({ request }) {
-  return redirect("./new")
-}
-
+import { NewItemDialog } from "./new"
+import { useState } from "react";
 export const loader = withAuth(async ({ request, params }) => {
   const response = await authFetch(backend.items, {
     method: "GET",
@@ -31,7 +28,8 @@ export const loader = withAuth(async ({ request, params }) => {
 })
 
 export function ItemPanel(props) {
-  const { items } = useLoaderData();
+  const { items } = useLoaderData()
+  const [isNewItemDialogOpen, setIsNewItemDialogOpen] = useState(false)
   let itemArea
   if (items.length === 0) {
     itemArea = <p>No item.</p>
@@ -48,11 +46,17 @@ export function ItemPanel(props) {
         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
           Items
         </Typography>
-        <Form method="post">
-          <Button type="submit">New</Button>
-        </Form>
+        <Button type="submit" onClick={() => {
+          setIsNewItemDialogOpen(true)
+        }}>New</Button>
       </ResponsiveAppBar>
       {itemArea}
+      <NewItemDialog
+        open={isNewItemDialogOpen}
+        onClose={() => {
+          setIsNewItemDialogOpen(false)
+        }}
+      />
     </>
   )
 }
