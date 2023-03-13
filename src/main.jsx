@@ -23,7 +23,7 @@ import {
   loader as studentListLoader,
 } from "./main/student/index"
 import {
-  NewItem,
+  NewItemPanel,
   action as newItemAction
 } from './main/item/new';
 import { i18n } from './env'
@@ -50,7 +50,7 @@ const router = createBrowserRouter([
       {
         path: "items/new",
         action: newItemAction,
-        element: <NewItem />
+        element: <NewItemPanel />
       },
       {
         path: "students",

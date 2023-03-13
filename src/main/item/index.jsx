@@ -52,7 +52,6 @@ export function ItemPanel(props) {
           <Button type="submit">New</Button>
         </Form>
       </ResponsiveAppBar>
-      <br />
       {itemArea}
     </>
   )
@@ -71,12 +70,3 @@ function ItemCard(props) {
   )
 }
 
-function Header(props) {
-  return (
-    <div className="app-bar">
-      <Form method="post">
-        <Button type="submit">New</Button>
-      </Form>
-    </div>
-  )
-}
