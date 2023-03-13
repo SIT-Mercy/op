@@ -27,11 +27,20 @@ export async function authFetch(url, init) {
 
 export function withAuth(func) {
   return async (...args) => {
-    try {
-      return await func(...args)
-    } catch (e) {
-      console.error(e.message)
-      return redirect("/")
+    if (arguments.length <= 1) {
+      try {
+        return await func(...args)
+      } catch (e) {
+        console.error(e.message)
+        return redirect("/")
+      }
+    } else {
+      try {
+        return await (arguments[1])(...args)
+      } catch (e) {
+        const navigate = arguments[0]
+        navigate("/")
+      }
     }
   }
 }

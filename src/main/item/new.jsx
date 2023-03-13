@@ -1,17 +1,19 @@
 import DialogTitle from '@mui/material/DialogTitle'
 import Dialog from '@mui/material/Dialog'
 import { Button, Typography } from "@mui/material"
+import { useNavigate } from 'react-router-dom'
 import {
   backend,
 } from "../../env"
 import {
-  authFetch
+  authFetch, withAuth
 } from "../../request"
 import { useForm } from "react-hook-form"
-
+import "./new.css"
 export function NewItemDialog(props) {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const onSubmit = async (data, event) => {
+  const navigate = useNavigate()
+  const onSubmit = withAuth(navigate, async (data, event) => {
     const response = await authFetch(backend.addItem, {
       method: "POST",
       body: JSON.stringify({
@@ -23,14 +25,13 @@ export function NewItemDialog(props) {
       }
     })
     const res = await response.json()
-  }
-  return <Dialog open={props.open} onClose={props.onClose}>
+    props.onClose()
+  })
+  return <Dialog className="new-item-dialog" open={props.open} onClose={props.onClose}>
     <form id="new-item-form" onSubmit={handleSubmit(onSubmit)} style={{ flexDirection: "column", display: "flex" }}>
-      {/* register your input into the hook by invoking the "register" function */}
       <input placeholder="Name"
         {...register("name", { required: true })}
       />
-      {/* include validation with required or other standard HTML validation rules */}
       <textarea
         style={{ resize: "none" }} rows={6} placeholder="Description"
         {...register("description", { required: true })} />
