@@ -10,7 +10,9 @@ import {
   loader as loginLoader,
   action as loginAction
 } from './login/login'
-import { DashBoard } from './main/dashboard'
+import {
+  DashBoard,
+} from './main/dashboard'
 import {
   ItemPanel,
   loader as itemListLoader,

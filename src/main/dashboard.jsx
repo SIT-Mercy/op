@@ -25,9 +25,11 @@ import {
   redirect,
   useNavigation,
   useSubmit,
+  useNavigate,
 } from "react-router-dom";
 import "./dashboard.css"
-import { i18n } from "../env"
+import { env, i18n } from "../env"
+import { Button } from "@mui/material";
 
 const drawerWidth = 240;
 
@@ -38,10 +40,17 @@ export function DashBoard() {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
+  const navigate = useNavigate()
+  const loginInfo = env.loginInfo
   const drawer = (
     <div id="sidebar">
-      <Toolbar />
+      <Toolbar>
+        <a>{loginInfo?.name}</a>
+        <Button onClick={() => {
+          env.loginInfo = null
+          navigate("/")
+        }}>{i18n.get("logout")}</Button>
+      </Toolbar>
       <Divider />
       <nav>
         <ul>

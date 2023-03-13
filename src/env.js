@@ -22,6 +22,10 @@ export const env = {
     return JSON.parse(localStorage.getItem("loginInfo"))
   },
   set loginInfo(value) {
-    localStorage.setItem("loginInfo", JSON.stringify(value))
+    if (value === null || value === undefined) {
+      localStorage.removeItem("loginInfo")
+    } else {
+      localStorage.setItem("loginInfo", JSON.stringify(value))
+    }
   }
 }

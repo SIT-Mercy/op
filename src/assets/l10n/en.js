@@ -14,6 +14,7 @@ const l10n = {
   },
   password: "Password",
   login: "Login",
+  logout: "Logout",
 }
 
 export default l10n

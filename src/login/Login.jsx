@@ -1,4 +1,5 @@
 // Import required modules
+import { Button } from '@mui/material';
 import React, { useState } from 'react';
 import {
   redirect,
@@ -15,7 +16,7 @@ import "./login.css"
 
 export async function loader({ request }) {
   const jwt = env.loginInfo?.jwt;
-  if (jwt === null) return null
+  if (!jwt) return null
   const response = await fetch(backend.validate, {
     method: 'POST',
     headers: {
@@ -46,9 +47,10 @@ export async function action({ request }) {
   const payload = await response.json()
   if (response.ok) {
     env.loginInfo = payload
-    return redirect("/dashboard")
+    return redirect("/dashboard/students")
   } else {
     alert('Invalid student ID or password');
+    return null
   }
 }
 
@@ -69,7 +71,7 @@ export function Login(props) {
           name="password"
         />
         <br />
-        <button type="submit">{i18n.get("login")}</button>
+        <Button type="submit">{i18n.get("login")}</Button>
       </Form>
     </div>
   );

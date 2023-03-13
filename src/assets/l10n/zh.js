@@ -14,6 +14,7 @@ const l10n = {
     point: "爱心积分",
   },
   login: "登录",
+  logout: "登出",
 }
 
 export default l10n
