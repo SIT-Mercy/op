@@ -1,9 +1,10 @@
 import {
   redirect
 } from "react-router-dom";
+import { env } from "./env";
 
 export function composeAuthHeader(jwt) {
-  jwt = jwt || localStorage.getItem('jwt');
+  jwt = jwt;
   return `Bearer ${jwt}`
 }
 
@@ -14,7 +15,7 @@ export class AuthError extends Error {
 }
 
 export async function authFetch(url, init) {
-  init.headers["Authorization"] = composeAuthHeader()
+  init.headers["Authorization"] = composeAuthHeader(env.loginInfo.jwt)
   const response = await fetch(url, init)
   if (response.ok) {
     return response

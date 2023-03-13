@@ -13,3 +13,7 @@
 #login-form>* {
   margin: 0.5rem;
 }
+
+#login-form>input {
+  color: white;
+}

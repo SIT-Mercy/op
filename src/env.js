@@ -16,3 +16,12 @@ export const { i18n, i18nProxy } = createI18n({
 })
 i18n.add("zh-CN", l10nZh)
 i18n.currentLocale = navigator.language
+
+export const env = {
+  get loginInfo() {
+    return JSON.parse(localStorage.getItem("loginInfo"))
+  },
+  set loginInfo(value) {
+    localStorage.setItem("loginInfo", JSON.stringify(value))
+  }
+}

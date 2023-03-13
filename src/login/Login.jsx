@@ -7,13 +7,14 @@ import {
 
 import {
   backend,
+  env,
   i18n
 } from "../env.js"
 import { composeAuthHeader } from '../request.js';
 import "./login.css"
 
 export async function loader({ request }) {
-  const jwt = localStorage.getItem("jwt")
+  const jwt = env.loginInfo?.jwt;
   if (jwt === null) return null
   const response = await fetch(backend.validate, {
     method: 'POST',
@@ -44,7 +45,7 @@ export async function action({ request }) {
   })
   const payload = await response.json()
   if (response.ok) {
-    localStorage.setItem("jwt", payload.token)
+    env.loginInfo = payload
     return redirect("/dashboard")
   } else {
     alert('Invalid student ID or password');
