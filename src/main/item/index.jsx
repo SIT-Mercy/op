@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import {
   Form,
   redirect,
@@ -11,7 +11,9 @@ import {
   authFetch,
   withAuth,
 } from "../../request"
+import { ResponsiveAppBar } from "../dashboard";
 import "./index.css"
+import Card from "@mui/material/Card"
 
 export function action({ request }) {
   return redirect("./new")
@@ -41,10 +43,18 @@ export function ItemPanel(props) {
     </ul>
   }
   return (
-    <div>
+    <>
+      <ResponsiveAppBar>
+        <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+          Items
+        </Typography>
+        <Form method="post">
+          <Button type="submit">New</Button>
+        </Form>
+      </ResponsiveAppBar>
       <br />
       {itemArea}
-    </div>
+    </>
   )
 }
 
@@ -52,12 +62,12 @@ function ItemCard(props) {
   const { item } = props
   // placeholder images.
   return (
-    <div className="card item-card">
+    <Card className="card item-card">
       <img src="https://picsum.photos/200" />
       <h3>{item.name}</h3>
       <br />
       <a>{item.description}</a>
-    </div>
+    </Card>
   )
 }
 

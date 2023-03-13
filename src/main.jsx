@@ -65,6 +65,22 @@ const darkTheme = createTheme({
   palette: {
     mode: 'dark',
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: "16px",
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: "16px",
+        },
+      },
+    }
+  },
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(

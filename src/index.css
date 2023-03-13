@@ -81,11 +81,6 @@ form[action$="destroy"] button {
 }
 
 .card {
-  display: block;
-  border-radius: 16px;
-  
-  box-shadow: 0 0 10px #000000AA;
-  background-color: #252525;
   line-height: 1.0;
 }
 

@@ -1,9 +1,11 @@
-import React from "react"
+import React, { useContext } from "react"
 import {
   Form,
   redirect,
   useLoaderData,
 } from "react-router-dom";
+
+import Typography from '@mui/material/Typography';
 import {
   backend, i18n,
 } from "../../env"
@@ -11,7 +13,7 @@ import {
   authFetch,
   withAuth,
 } from "../../request"
-
+import { ResponsiveAppBar } from "../dashboard"
 export const loader = withAuth(async ({ request, params }) => {
   const response = await authFetch(backend.students, {
     method: "GET",
@@ -37,10 +39,16 @@ export function StudentPanel() {
       }
     </ul>
   }
+
   return (
-    <div>
+    <>
+      <ResponsiveAppBar>
+        <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
+          Students
+        </Typography>
+      </ResponsiveAppBar>
       <StudentGrid data={students} />
-    </div>
+    </>
   )
 }
 
