@@ -68,6 +68,13 @@ const darkTheme = createTheme({
           borderRadius: "16px",
         },
       },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          margin: "8px",
+        }
+      }
     }
   },
 });

@@ -4,7 +4,7 @@ const l10n = {
     title: "Items",
     newBtn: "New",
     new: {
-      title: "Add a New Item",
+      title: "Add New Item",
       addBtn: "Add"
     },
   },

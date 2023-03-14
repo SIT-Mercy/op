@@ -1,4 +1,4 @@
-import { Button, CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
+import { Button, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import {
   redirect,
   useLoaderData,
@@ -9,14 +9,15 @@ import {
 } from "../../env"
 import {
   authFetch,
-  withAuth,
+  withAuth as authScoped,
 } from "../../request"
 import { ResponsiveAppBar } from "../dashboard";
-import "./index.css"
 import Card from "@mui/material/Card"
 import { NewItemDialog } from "./new"
 import { useState } from "react";
-export const loader = withAuth(async ({ request, params }) => {
+import "./index.css"
+
+export const loader = authScoped(async ({ request, params }) => {
   const response = await authFetch(backend.items, {
     method: "GET",
     headers: {
@@ -65,7 +66,7 @@ function ItemCard(props) {
   const { item } = props
   const navigate = useNavigate()
 
-  const deleteItem = withAuth(navigate, async () => {
+  const deleteItem = authScoped(navigate, async () => {
     const response = await authFetch(backend.deleteItem, {
       method: "DELETE",
       body: JSON.stringify({
@@ -86,6 +87,8 @@ function ItemCard(props) {
       </CardMedia>
       <CardContent>
         <h3>{item.name}</h3>
+        <h5>Price {item.price}</h5>
+        <h5>Rent {item.rent}</h5>
         <a>{item.description}</a>
       </CardContent>
       <CardActions>
