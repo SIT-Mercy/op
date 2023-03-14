@@ -14,6 +14,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import GTranslateIcon from '@mui/icons-material/GTranslate';
 
 import {
   Outlet,
@@ -29,6 +30,7 @@ import {
 import "./dashboard.css"
 import { env, i18n } from "../env"
 import { Button } from "@mui/material";
+import { LanguageContext } from "../main";
 
 const drawerWidth = 240;
 
@@ -37,7 +39,7 @@ export const IsDrawerOpenContext = createContext()
 export function DashBoard() {
   const navigation = useNavigation();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
+  const [lang, setLang] = useContext(LanguageContext)
   const navigate = useNavigate()
   const loginInfo = env.loginInfo
   const drawer = (
@@ -65,7 +67,17 @@ export function DashBoard() {
         <Button onClick={() => {
           env.loginInfo = null
           navigate("/")
-        }}>{i18n.get("logout")}</Button>
+        }}>{i18n.get("login.logout")}</Button>
+        <IconButton onClick={() => {
+          // TODO: language swicthing is only for dev
+          if (lang === "en-us") {
+            setLang("zh-cn")
+          } else {
+            setLang("en-us")
+          }
+        }}>
+          <GTranslateIcon />
+        </IconButton>
       </Toolbar>
     </div>
   );
@@ -73,7 +85,7 @@ export function DashBoard() {
     className={
       navigation.state === "loading" ? "loading" : ""
     }>
-    <IsDrawerOpenContext.Provider value={{ isDrawerOpen, setIsDrawerOpen }}>
+    <IsDrawerOpenContext.Provider value={[isDrawerOpen, setIsDrawerOpen]}>
       <Outlet />
     </IsDrawerOpenContext.Provider>
   </div>
@@ -131,7 +143,7 @@ function NavItem(props) {
 }
 
 export function ResponsiveAppBar(props) {
-  const { isDrawerOpen, setIsDrawerOpen } = useContext(IsDrawerOpenContext);
+  const [isDrawerOpen, setIsDrawerOpen] = useContext(IsDrawerOpenContext);
   return <AppBar
     position="fixed"
     sx={{

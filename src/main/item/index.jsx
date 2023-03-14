@@ -5,7 +5,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import {
-  backend,
+  backend, i18n,
 } from "../../env"
 import {
   authFetch,
@@ -44,11 +44,11 @@ export function ItemPanel(props) {
     <>
       <ResponsiveAppBar>
         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-          Items
+          {i18n.get("items.title")}
         </Typography>
         <Button type="submit" onClick={() => {
           setIsNewItemDialogOpen(true)
-        }}>New</Button>
+        }}>{i18n.get("items.newBtn")}</Button>
       </ResponsiveAppBar>
       {itemArea}
       <NewItemDialog

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, createContext, useEffect } from 'react'
 import ReactDOM from 'react-dom/client'
 import {
   createBrowserRouter,
@@ -72,12 +72,25 @@ const darkTheme = createTheme({
   },
 });
 
+export const LanguageContext = createContext()
+
+function App() {
+  const [lang, setLang] = useState(navigator.language)
+  useEffect(() => {
+    i18n.currentLocale = lang;
+  }, [lang]);
+
+  return <ThemeProvider theme={darkTheme}>
+    <CssBaseline />
+    <LanguageContext.Provider value={[lang, setLang]}>
+      <RouterProvider router={router} />
+    </LanguageContext.Provider>
+  </ThemeProvider>
+}
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <App />
   </React.StrictMode>,
 )
 

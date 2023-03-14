@@ -33,7 +33,7 @@ export class I18n {
       localized = this.getFrom(localized, part)
     }
     if (localized) {
-      return localized
+      return typeof localized === "string" ? localized : localized.toString()
     } else {
       return `?${key}?`
     }

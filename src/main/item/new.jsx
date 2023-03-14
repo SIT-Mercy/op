@@ -3,7 +3,7 @@ import Dialog from '@mui/material/Dialog'
 import { Button, TextField, Typography } from "@mui/material"
 import { useNavigate } from 'react-router-dom'
 import {
-  backend,
+  backend, i18n,
 } from "../../env"
 import {
   authFetch, withAuth
@@ -29,14 +29,15 @@ export function NewItemDialog(props) {
     props.onClose()
   })
   return <Dialog className="new-item-dialog" open={props.open} onClose={props.onClose}>
-    <form id="new-item-form" onSubmit={handleSubmit(onSubmit)} style={{ flexDirection: "column", display: "flex"}}>
-      <TextField label="Name"
+    <DialogTitle>{i18n.get("items.new.title")}</DialogTitle>
+    <form id="new-item-form" onSubmit={handleSubmit(onSubmit)} style={{ flexDirection: "column", display: "flex" }}>
+      <TextField label={i18n.get("item.name")}
         {...register("name", { required: true })}
       />
       <TextField multiline
-        style={{ resize: "none" }} rows={6} label="Description"
+        style={{ resize: "none" }} rows={6} label={i18n.get("item.description")}
         {...register("description", { required: true })} />
-      <Button type="submit">Add</Button>
+      <Button type="submit">{i18n.get("items.new.addBtn")}</Button>
     </form>
   </Dialog>
 }

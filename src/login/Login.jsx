@@ -56,12 +56,13 @@ export async function action({ request }) {
 
 const studentIdRegex = /^(\d{6}[YGHE\d]\d{3})$/i
 // Define Login component
+const validateStudentId = (text) => {
+  if (text.length === 0) return true
+  return text.length === 10 && studentIdRegex.test(text)
+}
 export function Login(props) {
   const [studentId, setStudentId] = useState("")
-  const validateStudentId = (text) => {
-    if(text.length === 0) return true
-    return text.length === 10 && studentIdRegex.test(text)
-  }
+  const valid = validateStudentId(studentId)
   return (
     <div id="login-dialog">
       <h1>{i18n.get("appName")}</h1>
@@ -69,7 +70,8 @@ export function Login(props) {
         <TextField
           type="text" required
           name="studentId"
-          error={!validateStudentId(studentId)}
+          error={!valid}
+          helperText={valid ? null : i18n.get("login.invalidStudentId")}
           onChange={(e) => {
             setStudentId(e.target.value)
           }}
@@ -78,11 +80,11 @@ export function Login(props) {
         <br />
         <TextField
           type="password" required
-          label={i18n.get("password")}
+          label={i18n.get("login.password")}
           name="password"
         />
         <br />
-        <Button type="submit">{i18n.get("login")}</Button>
+        <Button type="submit">{i18n.get("login.login")}</Button>
       </Form>
     </div>
   );

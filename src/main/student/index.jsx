@@ -44,7 +44,7 @@ export function StudentPanel() {
     <>
       <ResponsiveAppBar>
         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-          Students
+          {i18n.get("students.title")}
         </Typography>
       </ResponsiveAppBar>
       <StudentGrid data={students} />
@@ -84,7 +84,6 @@ const studentGridColumn = [
 
 function StudentGrid(props) {
   const data = props.data
-  console.log(data);
   const {
     getTableProps,
     getTableBodyProps,

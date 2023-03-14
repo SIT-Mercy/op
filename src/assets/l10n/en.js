@@ -2,6 +2,15 @@ const l10n = {
   appName: "SIT Mercy",
   items: {
     title: "Items",
+    newBtn: "New",
+    new: {
+      title: "Add a New Item",
+      addBtn: "Add"
+    },
+  },
+  item: {
+    name: "Name",
+    description: "Description"
   },
   students: {
     title: "Students",
@@ -12,9 +21,12 @@ const l10n = {
     college: "College",
     point: "Point",
   },
-  password: "Password",
-  login: "Login",
-  logout: "Logout",
+  login: {
+    login: "Login",
+    logout: "Logout",
+    invalidStudentId: "Invalid Student ID Format",
+    password: "Password",
+  },
 }
 
 export default l10n
