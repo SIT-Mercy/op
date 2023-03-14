@@ -7,6 +7,10 @@ const l10n = {
       title: "Add New Item",
       addBtn: "Add"
     },
+    edit: {
+      title: "Edit Item",
+      updateBtn: "Update",
+    }
   },
   item: {
     name: "Name",

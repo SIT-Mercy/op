@@ -83,6 +83,7 @@ form[action$="destroy"] button {
 }
 
 .card img {
+  min-width: 128px;
   width: 100%;
   object-fit: cover;
 }

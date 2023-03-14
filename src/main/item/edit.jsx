@@ -7,11 +7,11 @@ import {
 } from "../../request"
 
 import { ItemEditorDialog } from './item-editor'
-export function NewItemDialog(props) {
+export function EditItemDialog(props) {
   const navigate = useNavigate()
 
   const onSubmit = authScoped(navigate, async (data, event) => {
-    const response = await authFetch(backend.addItem, {
+    const response = await authFetch(backend.updateItem, {
       method: "POST",
       body: JSON.stringify({
         name: data.name,
@@ -28,8 +28,8 @@ export function NewItemDialog(props) {
     props.onClose()
   })
   return <ItemEditorDialog {...props}
-    title={i18n.get("items.new.title")}
-    button={i18n.get("items.new.addBtn")}
+    title={i18n.get("items.edit.title")}
+    button={i18n.get("items.edit.updateBtn")}
     onSubmit={onSubmit}
   />
 }

@@ -13,6 +13,7 @@ import {
 } from "../../request"
 import { ResponsiveAppBar } from "../dashboard";
 import { NewItemDialog } from "./new"
+import { EditItemDialog } from "./edit"
 import "./index.css"
 
 export const loader = authScoped(async ({ request, params }) => {
@@ -67,6 +68,7 @@ export function ItemPanel(props) {
 
 function ItemCard(props) {
   const { item } = props
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
   const navigate = useNavigate()
 
   const deleteItem = authScoped(navigate, async () => {
@@ -96,9 +98,21 @@ function ItemCard(props) {
       </CardContent>
       <CardActions>
         {props.alterItems &&
-          <Button size="small">
-            Edit
-          </Button>
+          <>
+            <Button size="small"
+              onClick={() => {
+                setIsEditDialogOpen(true)
+              }}>
+              Edit
+            </Button>
+            <EditItemDialog
+              item={item}
+              open={isEditDialogOpen}
+              onClose={() => {
+                setIsEditDialogOpen(false)
+              }}
+            />
+          </>
         }
         {props.alterItems &&
           <Button size="small" color="error" onClick={deleteItem}>
