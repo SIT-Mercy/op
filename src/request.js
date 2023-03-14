@@ -25,7 +25,7 @@ export async function authFetch(url, init) {
   }
 }
 
-export function withAuth(func) {
+export function authScoped(func) {
   return async (...args) => {
     if (arguments.length <= 1) {
       try {

@@ -1,20 +1,18 @@
-import { Button, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
+import { useState } from "react";
+import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import {
-  redirect,
   useLoaderData,
   useNavigate,
 } from "react-router-dom";
 import {
-  backend, i18n,
+  backend, env, i18n,
 } from "../../env"
 import {
   authFetch,
-  withAuth as authScoped,
+  authScoped,
 } from "../../request"
 import { ResponsiveAppBar } from "../dashboard";
-import Card from "@mui/material/Card"
 import { NewItemDialog } from "./new"
-import { useState } from "react";
 import "./index.css"
 
 export const loader = authScoped(async ({ request, params }) => {
@@ -31,13 +29,14 @@ export const loader = authScoped(async ({ request, params }) => {
 export function ItemPanel(props) {
   const { items } = useLoaderData()
   const [isNewItemDialogOpen, setIsNewItemDialogOpen] = useState(false)
+  const alterItems = env.loginInfo.permissions.includes("alterItems")
   let itemArea
   if (items.length === 0) {
     itemArea = <p>No item.</p>
   } else {
     itemArea = <ul className="item-grid">
       {
-        items.map(item => <ItemCard key={item._id} item={item} />)
+        items.map(item => <ItemCard alterItems={alterItems} key={item._id} item={item} />)
       }
     </ul>
   }
@@ -47,9 +46,13 @@ export function ItemPanel(props) {
         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
           {i18n.get("items.title")}
         </Typography>
-        <Button type="submit" onClick={() => {
-          setIsNewItemDialogOpen(true)
-        }}>{i18n.get("items.newBtn")}</Button>
+        {alterItems &&
+          <Button type="submit" onClick={() => {
+            setIsNewItemDialogOpen(true)
+          }}>
+            {i18n.get("items.newBtn")}
+          </Button>
+        }
       </ResponsiveAppBar>
       {itemArea}
       <NewItemDialog
@@ -92,8 +95,15 @@ function ItemCard(props) {
         <a>{item.description}</a>
       </CardContent>
       <CardActions>
-        <Button size="small">Edit</Button>
-        <Button size="small" color="error" onClick={deleteItem}>Delete</Button>
+        {props.alterItems &&
+          <Button size="small">
+            Edit
+          </Button>
+        }
+        {props.alterItems &&
+          <Button size="small" color="error" onClick={deleteItem}>
+            Delete
+          </Button>}
       </CardActions>
     </Card>
   )

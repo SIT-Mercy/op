@@ -7,7 +7,7 @@ import {
   backend, i18n,
 } from "../../env"
 import {
-  authFetch, withAuth
+  authFetch, authScoped
 } from "../../request"
 import { Controller, useForm } from "react-hook-form"
 import "./new.css"
@@ -17,7 +17,7 @@ export function NewItemDialog(props) {
   const [purchasable, setPurchasable] = useState(true)
   const [rentable, setRentable] = useState(false)
   const navigate = useNavigate()
-  const onSubmit = withAuth(navigate, async (data, event) => {
+  const onSubmit = authScoped(navigate, async (data, event) => {
     const response = await authFetch(backend.addItem, {
       method: "POST",
       body: JSON.stringify({

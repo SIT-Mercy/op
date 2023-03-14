@@ -11,10 +11,10 @@ import {
 } from "../../env"
 import {
   authFetch,
-  withAuth,
+  authScoped,
 } from "../../request"
 import { ResponsiveAppBar } from "../dashboard"
-export const loader = withAuth(async ({ request, params }) => {
+export const loader = authScoped(async ({ request, params }) => {
   const response = await authFetch(backend.students, {
     method: "GET",
     headers: {
