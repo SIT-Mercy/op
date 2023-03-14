@@ -1,8 +1,8 @@
-import { Button, Typography } from "@mui/material";
+import { Button, CardActionArea, CardActions, CardContent, CardMedia, Typography } from "@mui/material";
 import {
-  Form,
   redirect,
   useLoaderData,
+  useNavigate,
 } from "react-router-dom";
 import {
   backend,
@@ -63,13 +63,35 @@ export function ItemPanel(props) {
 
 function ItemCard(props) {
   const { item } = props
-  // placeholder images.
+  const navigate = useNavigate()
+
+  const deleteItem = withAuth(navigate, async () => {
+    const response = await authFetch(backend.deleteItem, {
+      method: "DELETE",
+      body: JSON.stringify({
+        _id: item._id,
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const res = await response.json()
+    navigate(".")
+  })
+  // TODO:placeholder images.
   return (
     <Card className="card item-card">
-      <img src="https://picsum.photos/200" />
-      <h3>{item.name}</h3>
-      <br />
-      <a>{item.description}</a>
+      <CardMedia>
+        <img src="https://picsum.photos/200" />
+      </CardMedia>
+      <CardContent>
+        <h3>{item.name}</h3>
+        <a>{item.description}</a>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Edit</Button>
+        <Button size="small" color="error" onClick={deleteItem}>Delete</Button>
+      </CardActions>
     </Card>
   )
 }

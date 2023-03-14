@@ -1,5 +1,5 @@
 // Import required modules
-import { Button } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import {
   redirect,
@@ -54,20 +54,31 @@ export async function action({ request }) {
   }
 }
 
+const studentIdRegex = /^(\d{6}[YGHE\d]\d{3})$/i
 // Define Login component
 export function Login(props) {
+  const [studentId, setStudentId] = useState("")
+  const validateStudentId = (text) => {
+    if(text.length === 0) return true
+    return text.length === 10 && studentIdRegex.test(text)
+  }
   return (
     <div id="login-dialog">
       <h1>{i18n.get("appName")}</h1>
       <Form method="post" id="login-form">
-        <span>{i18n.get("student.studentId")}</span>
-        <input
+        <TextField
           type="text" required
           name="studentId"
+          error={!validateStudentId(studentId)}
+          onChange={(e) => {
+            setStudentId(e.target.value)
+          }}
+          label={i18n.get("student.studentId")}
         />
         <br />
-        <span>{i18n.get("password")}</span>
-        <input type="password" required
+        <TextField
+          type="password" required
+          label={i18n.get("password")}
           name="password"
         />
         <br />

@@ -6,6 +6,7 @@ export const backend = {
   login: `${root}/op/login`,
   items: `${root}/op/items`,
   addItem: `${root}/op/item/add`,
+  deleteItem: `${root}/op/item/delete`,
   students: `${root}/op/students`,
 }
 import l10nEn from "./assets/l10n/en"
