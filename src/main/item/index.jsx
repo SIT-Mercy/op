@@ -15,6 +15,7 @@ import { ResponsiveAppBar } from "../dashboard";
 import { NewItemDialog } from "./new"
 import { EditItemDialog } from "./edit"
 import "./index.css"
+import { StaffPermission } from "mercy-shared";
 
 export const loader = authScoped(async ({ request, params }) => {
   const response = await authFetch(backend.items, {
@@ -30,7 +31,7 @@ export const loader = authScoped(async ({ request, params }) => {
 export function ItemPanel(props) {
   const { items } = useLoaderData()
   const [isNewItemDialogOpen, setIsNewItemDialogOpen] = useState(false)
-  const alterItems = env.loginInfo.permissions.includes("alterItems")
+  const alterItems = env.loginInfo.permissions.includes(StaffPermission.alterItems)
   let itemArea
   if (items.length === 0) {
     itemArea = <p>No item.</p>
@@ -48,20 +49,22 @@ export function ItemPanel(props) {
           {i18n.get("items.title")}
         </Typography>
         {alterItems &&
-          <Button type="submit" onClick={() => {
-            setIsNewItemDialogOpen(true)
-          }}>
-            {i18n.get("items.newBtn")}
-          </Button>
+          <>
+            <Button type="submit" onClick={() => {
+              setIsNewItemDialogOpen(true)
+            }}>
+              {i18n.get("items.newBtn")}
+            </Button>
+            <NewItemDialog
+              open={isNewItemDialogOpen}
+              onClose={() => {
+                setIsNewItemDialogOpen(false)
+              }}
+            />
+          </>
         }
       </ResponsiveAppBar>
       {itemArea}
-      <NewItemDialog
-        open={isNewItemDialogOpen}
-        onClose={() => {
-          setIsNewItemDialogOpen(false)
-        }}
-      />
     </>
   )
 }
@@ -96,29 +99,26 @@ function ItemCard(props) {
         <h5>Rent {item.rent}</h5>
         <a>{item.description}</a>
       </CardContent>
-      <CardActions>
-        {props.alterItems &&
-          <>
-            <Button size="small"
-              onClick={() => {
-                setIsEditDialogOpen(true)
-              }}>
-              Edit
-            </Button>
-            <EditItemDialog
-              item={item}
-              open={isEditDialogOpen}
-              onClose={() => {
-                setIsEditDialogOpen(false)
-              }}
-            />
-          </>
-        }
-        {props.alterItems &&
+      {props.alterItems &&
+        <CardActions>
+          <Button size="small"
+            onClick={() => {
+              setIsEditDialogOpen(true)
+            }}>
+            Edit
+          </Button>
+          <EditItemDialog
+            item={item}
+            open={isEditDialogOpen}
+            onClose={() => {
+              setIsEditDialogOpen(false)
+            }}
+          />
           <Button size="small" color="error" onClick={deleteItem}>
             Delete
-          </Button>}
-      </CardActions>
+          </Button>
+        </CardActions>
+      }
     </Card>
   )
 }

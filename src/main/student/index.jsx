@@ -4,10 +4,9 @@ import {
   redirect,
   useLoaderData,
 } from "react-router-dom";
-
 import Typography from '@mui/material/Typography';
 import {
-  backend, i18n,
+  backend, i18n, env,
 } from "../../env"
 import {
   authFetch,
@@ -29,6 +28,7 @@ export const loader = authScoped(async ({ request, params }) => {
 
 export function StudentPanel() {
   const { students } = useLoaderData();
+  const alterStudents = env.loginInfo.permissions.includes(StaffPermission.alterStudents)
   let studentArea
   if (students.length === 0) {
     studentArea = <p>No student.</p>
@@ -46,6 +46,9 @@ export function StudentPanel() {
         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
           {i18n.get("students.title")}
         </Typography>
+        {alterStudents &&
+          <Button onClick={() => {
+          }}>Add</Button>}
       </ResponsiveAppBar>
       <StudentGrid data={students} />
     </>
@@ -62,6 +65,8 @@ function Row(props) {
 }
 
 import { useTable } from 'react-table'
+import { StaffPermission } from "mercy-shared";
+import { Button } from "@mui/material";
 
 const studentGridColumn = [
   {

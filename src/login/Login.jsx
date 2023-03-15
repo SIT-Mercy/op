@@ -17,16 +17,20 @@ import "./login.css"
 export async function loader({ request }) {
   const jwt = env.loginInfo?.jwt;
   if (!jwt) return null
-  const response = await fetch(backend.validate, {
-    method: 'POST',
-    headers: {
-      Authorization: composeAuthHeader(jwt),
-      'Content-Type': 'application/json',
+  try {
+    const response = await fetch(backend.validate, {
+      method: 'POST',
+      headers: {
+        Authorization: composeAuthHeader(jwt),
+        'Content-Type': 'application/json',
+      }
+    })
+    if (response.ok) {
+      return redirect("/dashboard")
+    } else {
+      return null
     }
-  })
-  if (response.ok) {
-    return redirect("/dashboard")
-  } else {
+  } catch (e) {
     return null
   }
 }
@@ -69,6 +73,7 @@ export function Login(props) {
       <Form method="post" id="login-form">
         <TextField
           type="text" required
+          autoFocus
           name="studentId"
           error={!valid}
           helperText={valid ? null : i18n.get("login.invalidStudentId")}

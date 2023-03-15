@@ -7,6 +7,10 @@ const l10n = {
       title: "添加新物品",
       add: "添加"
     },
+    edit: {
+      title: "编辑物品",
+      updateBtn: "更新",
+    }
   },
   item: {
     name: "名称",
