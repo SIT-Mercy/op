@@ -52,7 +52,7 @@ export function StudentPanel() {
           <>
             <Button onClick={() => {
               setIsUploadSheetDialogOpen(true)
-            }}>Add</Button>
+            }}>Upload Sheet</Button>
             <SheetUploadDialog
               open={isUploadSheetDialogOpen}
               onClose={() => {

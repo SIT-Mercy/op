@@ -75,6 +75,13 @@ const darkTheme = createTheme({
           margin: "8px",
         }
       }
+    },
+    MuiDialog: {
+      styleOverrides: {
+        paper:{
+          borderRadius: "16px",
+        },
+      }
     }
   },
 });
