@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --no-clear-screen --force",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -19,6 +19,7 @@
     "mercy-shared": "github:SIT-Mercy/shared",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.43.5",
     "react-router-dom": "^6.8.2",
     "react-table": "^7.8.0",

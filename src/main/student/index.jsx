@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useState } from "react"
 import {
   Form,
   redirect,
@@ -28,6 +28,8 @@ export const loader = authScoped(async ({ request, params }) => {
 
 export function StudentPanel() {
   const { students } = useLoaderData();
+  const [isUploadSheetDialogOpen, setIsUploadSheetDialogOpen] = useState(false)
+
   const alterStudents = env.loginInfo.permissions.includes(StaffPermission.alterStudents)
   let studentArea
   if (students.length === 0) {
@@ -47,8 +49,17 @@ export function StudentPanel() {
           {i18n.get("students.title")}
         </Typography>
         {alterStudents &&
-          <Button onClick={() => {
-          }}>Add</Button>}
+          <>
+            <Button onClick={() => {
+              setIsUploadSheetDialogOpen(true)
+            }}>Add</Button>
+            <SheetUploadDialog
+              open={isUploadSheetDialogOpen}
+              onClose={() => {
+                setIsUploadSheetDialogOpen(false)
+              }}
+            />
+          </>}
       </ResponsiveAppBar>
       <StudentGrid data={students} />
     </>
@@ -67,6 +78,7 @@ function Row(props) {
 import { useTable } from 'react-table'
 import { StaffPermission } from "mercy-shared";
 import { Button } from "@mui/material";
+import { SheetUploadDialog } from "./sheet";
 
 const studentGridColumn = [
   {
